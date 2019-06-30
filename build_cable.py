@@ -111,7 +111,7 @@ if __name__ == "__main__":
     cwd = os.getcwd()
     #src_dir = "src"
     src_dir = cwd
-    repo = "trunk_c3_c4"
+    repo = "trunk"
 
 
     NCDIR = '/opt/local/lib/'

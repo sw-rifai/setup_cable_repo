@@ -111,7 +111,7 @@ if __name__ == "__main__":
     #src_dir = "src"
     src_dir = cwd
     user = "mgk576"
-    repo = "trunk_c3_c4"
+    repo = "trunk"
     # ------------------------------------------- #
 
     G = GetCable(src_dir=src_dir, user=user)
