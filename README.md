@@ -20,6 +20,13 @@ To work, the expectation is that the user will update the relevant entries (e.g.
     ...
     # ------------------------------------------- #
 
+
+NB. to self, deleta a branch:
+
+```bash
+$ svn rm https://trac.nci.org.au/svn/cable/branches/Users/mgk576/CABLE-trunk -m "Deleting branch"
+```
+
 ## Contacts
 
 * [Martin De Kauwe](http://mdekauwe.github.io/)
