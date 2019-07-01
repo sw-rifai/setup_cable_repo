@@ -102,26 +102,72 @@ class BuildCable(object):
 
         os.remove(ofname)
 
+    def set_paths(self, nodename):
+
+        if "Mac" in nodename or "imac" in nodename:
+            self.NCDIR = '/opt/local/lib/'
+            self.NCMOD = '/opt/local/include/'
+            self.FC = 'gfortran'
+            self.CFLAGS = '-O2'
+            self.LD = "'-lnetcdf -lnetcdff'"
+            self.LDFLAGS = "'-L/opt/local/lib -O2'"
+
+        elif "unsw" in nodename:
+            cmd = "module load netcdf/4.1.3-intel"
+            error = subprocess.call(cmd, shell=True)
+            if error is 1:
+                raise("Error loading netcdf libs")
+
+            self.NCDIR = '/share/apps/netcdf/intel/4.1.3/lib'
+            self.NCMOD = '/share/apps/netcdf/intel/4.1.3/include'
+            self.FC = 'ifort'
+            self.CFLAGS = '-O2'
+            self.LD = "'-lnetcdf -lnetcdff'"
+            self.LDFLAGS = "'-L/opt/local/lib -O2'"
+
+        else:
+            # this won't work on qsub as the nodename isn't raijinX, it
+            # is r1997 (etc) elif "raijin" in nodename:
+
+            cmd = "module unload netcdf"
+            error = subprocess.call(cmd, shell=True)
+            if error is 1:
+                raise("Error unloading netcdf libs")
+
+            cmd = "module load netcdf/4.3.3.1"
+            error = subprocess.call(cmd, shell=True)
+            if error is 1:
+                raise("Error loading netcdf libs")
+
+            self.NCDIR = '/apps/netcdf/4.3.3.1/lib'
+            self.NCMOD = '/apps/netcdf/4.3.3.1/include'
+            self.FC = 'ifort'
+            self.CFLAGS = '-O2'
+            self.LD = "'-lnetcdf -lnetcdff'"
+            self.LDFLAGS = "'-L/opt/local/lib -O2'"
+
+
 if __name__ == "__main__":
 
-    now = datetime.datetime.now()
-    date = now.strftime("%d_%m_%Y")
+    cwd = os.getcwd()
+    (sysname, nodename, release, version, machine) = os.uname()
 
     #------------- Change stuff ------------- #
-    cwd = os.getcwd()
-    #src_dir = "src"
     src_dir = cwd
     repo = "trunk"
+    define_own_paths = False
 
-
-    NCDIR = '/opt/local/lib/'
-    NCMOD = '/opt/local/include/'
-    FC = 'gfortran'
-    CFLAGS = '-O2'
-    LD = "'-lnetcdf -lnetcdff'"
-    LDFLAGS = "'-L/opt/local/lib -O2'"
+    if define_own_paths:
+        raise("you need to set these then!")
+        #NCDIR = '/opt/local/lib/'
+        #NCMOD = '/opt/local/include/'
+        #FC = 'gfortran'
+        #CFLAGS = '-O2'
+        #LD = "'-lnetcdf -lnetcdff'"
+        #LDFLAGS = "'-L/opt/local/lib -O2'"
     # ------------------------------------------- #
 
-    B = BuildCable(src_dir=src_dir, NCDIR=NCDIR, NCMOD=NCMOD, FC=FC,
-                   CFLAGS=CFLAGS, LD=LD, LDFLAGS=LDFLAGS)
+    B = BuildCable(src_dir=src_dir)
+    if define_own_paths == False:
+        B.set_paths(nodename)
     B.main(repo_name=repo)
