@@ -147,7 +147,7 @@ class BuildCable(object):
             self.NCDIR = '/apps/netcdf/4.3.3.1/lib'
             self.NCMOD = '/apps/netcdf/4.3.3.1/include'
             self.FC = 'mpif90'
-            self.CFLAGS = '-O2 -fp-model precise'
+            self.CFLAGS = '-O2'
             self.LD = "'-lnetcdf -lnetcdff'"
             self.LDFLAGS = "'-L/opt/local/lib -O2'"
 
