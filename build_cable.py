@@ -57,6 +57,7 @@ class BuildCable(object):
         ofname = "my_build.ksh"
         of = open(ofname, "w")
 
+        check_host = "host_%s()" % (host)
         i = 0
         while i < len(lines):
             line = lines[i]
@@ -80,6 +81,10 @@ class BuildCable(object):
                 print("}", end="\n\n", file=of)
 
                 i += 5
+            elif ('known_hosts()' not in line) and (check_host in line):
+                # rename duplicate host, i.e. stud
+                fudge_host = "host_%s()" % ("XXXX")
+                print("%s" % (fudge_host), end="\n", file=of)
             else:
                 print(line, end="", file=of)
             i += 1
@@ -95,12 +100,13 @@ class BuildCable(object):
         if error is 1:
             raise("Error changing file to executable")
 
-        cmd = "./%s" % (ofname)
+        cmd = "./%s clean" % (ofname)
         error = subprocess.call(cmd, shell=True)
         if error is 1:
             raise("Error building executable")
 
-        os.remove(ofname)
+        print(ofname)
+        #os.remove(ofname)
 
     def set_paths(self, nodename):
 
@@ -108,7 +114,7 @@ class BuildCable(object):
             self.NCDIR = '/opt/local/lib/'
             self.NCMOD = '/opt/local/include/'
             self.FC = 'gfortran'
-            self.CFLAGS = '-O2'
+            self.CFLAGS = "'-O2'"
             self.LD = "'-lnetcdf -lnetcdff'"
             self.LDFLAGS = "'-L/opt/local/lib -O2'"
 
@@ -121,14 +127,13 @@ class BuildCable(object):
             self.NCDIR = '/share/apps/netcdf/intel/4.1.3/lib'
             self.NCMOD = '/share/apps/netcdf/intel/4.1.3/include'
             self.FC = 'ifort'
-            self.CFLAGS = '-O2'
+            self.CFLAGS = "'-O2'"
             self.LD = "'-lnetcdf -lnetcdff'"
             self.LDFLAGS = "'-L/opt/local/lib -O2'"
 
         else:
             # this won't work on qsub as the nodename isn't raijinX, it
             # is r1997 (etc) elif "raijin" in nodename:
-
             cmd = "module unload netcdf"
             error = subprocess.call(cmd, shell=True)
             if error is 1:
@@ -142,7 +147,7 @@ class BuildCable(object):
             self.NCDIR = '/apps/netcdf/4.3.3.1/lib'
             self.NCMOD = '/apps/netcdf/4.3.3.1/include'
             self.FC = 'ifort'
-            self.CFLAGS = '-O2'
+            self.CFLAGS = "'-O2'"
             self.LD = "'-lnetcdf -lnetcdff'"
             self.LDFLAGS = "'-L/opt/local/lib -O2'"
 
