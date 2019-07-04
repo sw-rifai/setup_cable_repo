@@ -49,14 +49,15 @@ class BuildCable(object):
         if error is 1:
             raise("Error checking if repo exists")
 
-        fname = "build_mpi.ksh"
+        fname = "build.ksh"
         f = open(fname, "r")
         lines = f.readlines()
         f.close()
 
-        ofname = "my_build_mpi.ksh"
+        ofname = "my_build.ksh"
         of = open(ofname, "w")
 
+        check_host = "host_%s()" % (host)
         i = 0
         while i < len(lines):
             line = lines[i]
@@ -80,6 +81,10 @@ class BuildCable(object):
                 print("}", end="\n\n", file=of)
 
                 i += 5
+            elif ('known_hosts()' not in line) and (check_host in line):
+                # rename duplicate host, i.e. stud
+                fudge_host = "host_%s()" % ("XXXX")
+                print("%s" % (fudge_host), end="\n", file=of)
             else:
                 print(line, end="", file=of)
             i += 1
