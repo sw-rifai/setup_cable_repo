@@ -70,7 +70,7 @@ class GetCable(object):
                 raise("Error downloading repo")
 
         # Checkout named branch ...
-        elif trunk:
+        else:
 
             # Check if we have a local copy of the branch?
             cmd = "svn info %s" % (repo_name)
@@ -111,6 +111,7 @@ if __name__ == "__main__":
     #src_dir = "src"
     src_dir = cwd
     user = "mgk576"
+    #repo = "https://trac.nci.org.au/svn/cable/branches/Users/mm3972/Marks_latest_branch_with_fixes_gw"
     repo = "trunk"
     # ------------------------------------------- #
 
