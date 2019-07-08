@@ -18,7 +18,7 @@ import datetime
 class BuildCable(object):
 
     def __init__(self, src_dir=None, NCDIR=None, NCMOD=None, FC=None,
-                 CFLAGS=None, LD=None, LDFLAGS=None):
+                 CFLAGS=None, LD=None, LDFLAGS=None, debug=False):
 
         self.src_dir = src_dir
         self.NCDIR = NCDIR
@@ -27,6 +27,7 @@ class BuildCable(object):
         self.CFLAGS = CFLAGS
         self.LD = LD
         self.LDFLAGS = LDFLAGS
+        self.debug = debug
 
     def main(self, repo_name=None, trunk=False):
 
@@ -100,7 +101,10 @@ class BuildCable(object):
         if error is 1:
             raise("Error changing file to executable")
 
-        cmd = "./%s clean" % (ofname)
+        if self.debug:
+            cmd = "./%s debug" % (ofname)
+        else:
+            cmd = "./%s clean" % (ofname)
         error = subprocess.call(cmd, shell=True)
         if error is 1:
             raise("Error building executable")
@@ -147,7 +151,10 @@ class BuildCable(object):
             self.NCDIR = '/apps/netcdf/4.3.3.1/lib'
             self.NCMOD = '/apps/netcdf/4.3.3.1/include'
             self.FC = 'mpif90'
-            self.CFLAGS = '-O2'
+            if self.debug:
+                self.CFLAGS = '-O0'
+            else:
+                self.CFLAGS = '-O2'
             self.LD = "'-lnetcdf -lnetcdff'"
             self.LDFLAGS = "'-L/opt/local/lib -O2'"
 
