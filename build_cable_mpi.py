@@ -102,6 +102,7 @@ class BuildCable(object):
             raise("Error changing file to executable")
 
         if self.debug:
+            print("HERE")
             cmd = "./%s debug" % (ofname)
         else:
             cmd = "./%s clean" % (ofname)
@@ -164,7 +165,7 @@ if __name__ == "__main__":
     src_dir = cwd
     repo = "trunk"
     define_own_paths = False
-    debug = False
+    debug = True
 
     if define_own_paths:
         raise("you need to set these then!")
