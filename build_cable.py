@@ -105,8 +105,7 @@ class BuildCable(object):
         if error is 1:
             raise("Error building executable")
 
-        print(ofname)
-        #os.remove(ofname)
+        os.remove(ofname)
 
     def set_paths(self, nodename):
 

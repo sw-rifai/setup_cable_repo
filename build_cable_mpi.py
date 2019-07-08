@@ -102,14 +102,14 @@ class BuildCable(object):
             raise("Error changing file to executable")
 
         if self.debug:
-            cmd = "./%s clean debug" % (ofname)
+            cmd = "./%s clean" % (ofname)
         else:
             cmd = "./%s clean" % (ofname)
         error = subprocess.call(cmd, shell=True)
         if error is 1:
             raise("Error building executable")
 
-        #os.remove(ofname)
+        os.remove(ofname)
 
     def set_paths(self, nodename):
 
