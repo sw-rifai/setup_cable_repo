@@ -61,7 +61,7 @@ class BuildCable(object):
         i = 0
         while i < len(lines):
             line = lines[i]
-            if 'known_hosts()' in line:
+            if 'known_hosts()' in line and i < 10:
                 print("known_hosts()", end="\n", file=of)
                 print("{", end="\n", file=of)
                 print("  set -A kh  pear jigg nXXX raij ces2 ccrc mael %s" %\
