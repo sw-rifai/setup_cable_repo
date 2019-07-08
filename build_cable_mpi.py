@@ -167,6 +167,7 @@ if __name__ == "__main__":
     src_dir = cwd
     repo = "trunk"
     define_own_paths = False
+    debug = False
 
     if define_own_paths:
         raise("you need to set these then!")
@@ -178,7 +179,7 @@ if __name__ == "__main__":
         #LDFLAGS = "'-L/opt/local/lib -O2'"
     # ------------------------------------------- #
 
-    B = BuildCable(src_dir=src_dir)
+    B = BuildCable(src_dir=src_dir, debug=debug)
     if define_own_paths == False:
         B.set_paths(nodename)
     B.main(repo_name=repo)
