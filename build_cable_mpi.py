@@ -103,7 +103,6 @@ class BuildCable(object):
 
         if self.debug:
             cmd = "./%s debug" % (ofname)
-            print(cmd)
         else:
             cmd = "./%s clean" % (ofname)
         error = subprocess.call(cmd, shell=True)
@@ -152,7 +151,10 @@ class BuildCable(object):
             self.NCDIR = '/apps/netcdf/4.3.3.1/lib'
             self.NCMOD = '/apps/netcdf/4.3.3.1/include'
             self.FC = 'mpif90'
-            self.CFLAGS = '-O2' # if debug is set this will be ignored
+            if self.debug:
+                self.CFLAGS = '-O0'
+            else:
+                self.CFLAGS = '-O2'
             self.LD = "'-lnetcdf -lnetcdff'"
             self.LDFLAGS = "'-L/opt/local/lib -O2'"
 
@@ -165,7 +167,7 @@ if __name__ == "__main__":
     src_dir = cwd
     repo = "trunk"
     define_own_paths = False
-    debug = True
+    debug = False
 
     if define_own_paths:
         raise("you need to set these then!")
