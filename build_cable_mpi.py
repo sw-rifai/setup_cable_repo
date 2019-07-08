@@ -167,7 +167,7 @@ if __name__ == "__main__":
     src_dir = cwd
     repo = "trunk"
     define_own_paths = False
-    debug = False
+    debug = True
 
     if define_own_paths:
         raise("you need to set these then!")
