@@ -153,7 +153,7 @@ class BuildCable(object):
             self.FC = 'mpif90'
             if self.debug:
                 #self.CFLAGS = '-O0'
-                self.CFLAGS = '-O0 -fp-model precise -fpe0 -g -traceback  -nostand -check all,noarg_temp_created -debug all'
+                self.CFLAGS = '-O0 -fp-model precise -traceback -nostand -check all -debug all'
             else:
                 self.CFLAGS = '-O2'
             self.LD = "'-lnetcdf -lnetcdff'"
@@ -168,7 +168,7 @@ if __name__ == "__main__":
     src_dir = cwd
     repo = "trunk"
     define_own_paths = False
-    debug = False
+    debug = True
 
     if define_own_paths:
         raise("you need to set these then!")
