@@ -152,7 +152,8 @@ class BuildCable(object):
             self.NCMOD = '/apps/netcdf/4.3.3.1/include'
             self.FC = 'mpif90'
             if self.debug:
-                self.CFLAGS = '-O0'
+                #self.CFLAGS = '-O0'
+                self.CFLAGS = '-O0 -fp-model precise -fpe0 -g -traceback  -nostand -check all,noarg_temp_created -debug all'
             else:
                 self.CFLAGS = '-O2'
             self.LD = "'-lnetcdf -lnetcdff'"
