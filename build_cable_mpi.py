@@ -72,6 +72,7 @@ class BuildCable(object):
                 print("    export NCDIR=%s" % (self.NCDIR), end="\n", file=of)
                 print("    export NCMOD=%s" % (self.NCMOD), end="\n", file=of)
                 print("    export FC=%s" % (self.FC), end="\n", file=of)
+                print("    export CFLAGS=%s" % (self.CFLAGS))
                 print("    export CFLAGS=%s" % (self.CFLAGS), end="\n", file=of)
                 print("    export LD=%s" % (self.LD), end="\n", file=of)
                 print("    export LDFLAGS=%s" % (self.LDFLAGS), end="\n", file=of)
