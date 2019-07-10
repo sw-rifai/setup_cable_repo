@@ -50,12 +50,12 @@ class BuildCable(object):
         if error is 1:
             raise("Error checking if repo exists")
 
-        fname = "build.ksh"
+        fname = "build_mpi.ksh"
         f = open(fname, "r")
         lines = f.readlines()
         f.close()
 
-        ofname = "my_build.ksh"
+        ofname = "my_build_mpi.ksh"
         of = open(ofname, "w")
 
         check_host = "host_%s()" % (host)
