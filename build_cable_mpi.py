@@ -72,7 +72,6 @@ class BuildCable(object):
                 print("    export NCDIR=%s" % (self.NCDIR), end="\n", file=of)
                 print("    export NCMOD=%s" % (self.NCMOD), end="\n", file=of)
                 print("    export FC=%s" % (self.FC), end="\n", file=of)
-                print("    export CFLAGS=%s" % (self.CFLAGS))
                 print("    export CFLAGS=%s" % (self.CFLAGS), end="\n", file=of)
                 print("    export LD=%s" % (self.LD), end="\n", file=of)
                 print("    export LDFLAGS=%s" % (self.LDFLAGS), end="\n", file=of)
@@ -154,7 +153,7 @@ class BuildCable(object):
             self.FC = 'mpif90'
             if self.debug:
                 #self.CFLAGS = "'-O0'"
-                self.CFLAGS = "'-O0 -fp-model precise -traceback -nostand -check all -debug all'"
+                self.CFLAGS = "'-O0 -fp-model precise -fpe0 -g -traceback  -nostand -check all,noarg_temp_created -debug all'"
             else:
                 self.CFLAGS = "'-O2'"
             self.LD = "'-lnetcdf -lnetcdff'"
