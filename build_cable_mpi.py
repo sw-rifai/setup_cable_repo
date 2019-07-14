@@ -155,7 +155,7 @@ class BuildCable(object):
                 #self.CFLAGS = "'-O0'"
                 self.CFLAGS = "'-O0 -fp-model precise -fpe0 -g -traceback  -nostand -check all,noarg_temp_created -debug all'"
             else:
-                self.CFLAGS = "'-O2'"
+                self.CFLAGS = "'-O3 -xBROADWELL'"
             self.LD = "'-lnetcdf -lnetcdff'"
             self.LDFLAGS = "'-L/opt/local/lib -O2'"
 
