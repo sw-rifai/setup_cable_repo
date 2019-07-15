@@ -116,7 +116,7 @@ class BuildCable(object):
             self.FC = 'gfortran'
             if self.debug:
                 #self.CFLAGS = "'-O0'"
-                self.CFLAGS = "'-O0 -g -debug'"
+                self.CFLAGS = "'-O0 -g'"
             else:
                 self.CFLAGS = "'-O2'"
 
