@@ -18,7 +18,7 @@ import datetime
 class BuildCable(object):
 
     def __init__(self, src_dir=None, NCDIR=None, NCMOD=None, FC=None,
-                 CFLAGS=None, LD=None, LDFLAGS=None):
+                 CFLAGS=None, LD=None, LDFLAGS=None, debug=False):
 
         self.src_dir = src_dir
         self.NCDIR = NCDIR
@@ -27,6 +27,7 @@ class BuildCable(object):
         self.CFLAGS = CFLAGS
         self.LD = LD
         self.LDFLAGS = LDFLAGS
+        self.debug = debug
 
     def main(self, repo_name=None, trunk=False):
 
@@ -113,7 +114,12 @@ class BuildCable(object):
             self.NCDIR = '/opt/local/lib/'
             self.NCMOD = '/opt/local/include/'
             self.FC = 'gfortran'
-            self.CFLAGS = "'-O2'"
+            if self.debug:
+                #self.CFLAGS = "'-O0'"
+                self.CFLAGS = "'-O0 -fp-model precise -fpe0 -g -traceback  -nostand -check all,noarg_temp_created -debug all'"
+            else:
+                self.CFLAGS = "'-O2'"
+
             self.LD = "'-lnetcdf -lnetcdff'"
             self.LDFLAGS = "'-L/opt/local/lib -O2'"
 
@@ -158,8 +164,9 @@ if __name__ == "__main__":
 
     #------------- Change stuff ------------- #
     src_dir = cwd
-    repo = "trunk"
+    repo = "trunk_DESICA"
     define_own_paths = False
+    debug = True
 
     if define_own_paths:
         raise("you need to set these then!")
@@ -171,7 +178,7 @@ if __name__ == "__main__":
         #LDFLAGS = "'-L/opt/local/lib -O2'"
     # ------------------------------------------- #
 
-    B = BuildCable(src_dir=src_dir)
+    B = BuildCable(src_dir=src_dir, debug=debug)
     if define_own_paths == False:
         B.set_paths(nodename)
     B.main(repo_name=repo)

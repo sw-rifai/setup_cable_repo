@@ -101,10 +101,7 @@ class BuildCable(object):
         if error is 1:
             raise("Error changing file to executable")
 
-        if self.debug:
-            cmd = "./%s clean" % (ofname)
-        else:
-            cmd = "./%s clean" % (ofname)
+        cmd = "./%s clean" % (ofname)
         error = subprocess.call(cmd, shell=True)
         if error is 1:
             raise("Error building executable")
@@ -166,7 +163,7 @@ if __name__ == "__main__":
 
     #------------- Change stuff ------------- #
     src_dir = cwd
-    repo = "trunk"
+    repo = "trunk_DESICA"
     define_own_paths = False
     debug = False
 
