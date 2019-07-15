@@ -116,7 +116,7 @@ class BuildCable(object):
             self.FC = 'gfortran'
             if self.debug:
                 #self.CFLAGS = "'-O0'"
-                self.CFLAGS = "'-O0 -fp-model precise -fpe0 -g -traceback  -nostand -check all,noarg_temp_created -debug all'"
+                self.CFLAGS = "'-O0 precise -g -debug all'"
             else:
                 self.CFLAGS = "'-O2'"
 
@@ -132,7 +132,11 @@ class BuildCable(object):
             self.NCDIR = '/share/apps/netcdf/intel/4.1.3/lib'
             self.NCMOD = '/share/apps/netcdf/intel/4.1.3/include'
             self.FC = 'ifort'
-            self.CFLAGS = "'-O2'"
+            if self.debug:
+                #self.CFLAGS = "'-O0'"
+                self.CFLAGS = "'-O0 -fp-model precise -fpe0 -g -traceback  -nostand -check all,noarg_temp_created -debug all'"
+            else:
+                self.CFLAGS = "'-O2'"
             self.LD = "'-lnetcdf -lnetcdff'"
             self.LDFLAGS = "'-L/opt/local/lib -O2'"
 
@@ -152,7 +156,11 @@ class BuildCable(object):
             self.NCDIR = '/apps/netcdf/4.3.3.1/lib'
             self.NCMOD = '/apps/netcdf/4.3.3.1/include'
             self.FC = 'ifort'
-            self.CFLAGS = "'-O2'"
+            if self.debug:
+                #self.CFLAGS = "'-O0'"
+                self.CFLAGS = "'-O0 -fp-model precise -fpe0 -g -traceback  -nostand -check all,noarg_temp_created -debug all'"
+            else:
+                self.CFLAGS = "'-O2'"
             self.LD = "'-lnetcdf -lnetcdff'"
             self.LDFLAGS = "'-L/opt/local/lib -O2'"
 
