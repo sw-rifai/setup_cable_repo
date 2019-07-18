@@ -163,7 +163,7 @@ if __name__ == "__main__":
 
     #------------- Change stuff ------------- #
     src_dir = cwd
-    repo = "trunk_DESICA"
+    repo = "trunk_DESICA_PFTs"
     define_own_paths = False
     debug = False
 
