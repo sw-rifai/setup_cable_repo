@@ -124,13 +124,23 @@ class BuildCable(object):
             self.LDFLAGS = "'-L/opt/local/lib -O2'"
 
         elif "unsw" in nodename:
-            cmd = "module load netcdf/4.1.3-intel"
+            # Will only work on 5,6,7 due to svn handshake issue
+            #alias sshunsw5='ssh -Y z3497040@cyclone.ccrc.unsw.edu.au'
+            #alias sshunsw6='ssh -Y z3497040@hurricane.ccrc.unsw.edu.au'
+            #alias sshunsw7='ssh -Y z3497040@typhoon.ccrc.unsw.edu.au'
+
+            #cmd = "module load netcdf/4.1.3-intel"
+            cmd = "module load netcdf-c/4.4.1.1-intel"
+            cmd = "module load netcdf-f/4.4.4-intel"
             error = subprocess.call(cmd, shell=True)
             if error is 1:
                 raise("Error loading netcdf libs")
 
-            self.NCDIR = '/share/apps/netcdf/intel/4.1.3/lib'
-            self.NCMOD = '/share/apps/netcdf/intel/4.1.3/include'
+            #self.NCDIR = '/share/apps/netcdf/intel/4.1.3/lib'
+            #self.NCMOD = '/share/apps/netcdf/intel/4.1.3/include'
+
+            self.NCDIR = '/share/apps/netcdf-f/intel/4.4.4/lib'
+            self.NCMOD = '/share/apps/netcdf-f/intel/4.4.4/include'
             self.FC = 'ifort'
             if self.debug:
                 #self.CFLAGS = "'-O0'"
