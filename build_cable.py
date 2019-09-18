@@ -176,9 +176,6 @@ class BuildCable(object):
             self.LD = "'-lnetcdf -lnetcdff'"
             self.LDFLAGS = "'-L/opt/local/lib -O2'"
 
-            module load netcdf-c/4.4.1.1-intel
-module load netcdf-f/4.4.4-intel
-
 if __name__ == "__main__":
 
     cwd = os.getcwd()
