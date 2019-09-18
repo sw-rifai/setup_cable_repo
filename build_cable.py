@@ -165,8 +165,8 @@ class BuildCable(object):
 
             #self.NCDIR = '/apps/netcdf/4.3.3.1/lib'
             #self.NCMOD = '/apps/netcdf/4.3.3.1/include'
-            self.NCDIR = '/share/apps/netcdf-f/4.4.4-netcdfc-4.6.1/lib'
-            self.NCMOD = '/share/apps/netcdf-f/4.4.4-netcdfc-4.6.1/include'
+            self.NCDIR = '/share/apps/netcdf-f/intel/4.4.4/lib'
+            self.NCMOD = '/share/apps/netcdf-f/intel/4.4.4/include'
             self.FC = 'ifort'
             if self.debug:
                 #self.CFLAGS = "'-O0'"
@@ -175,6 +175,8 @@ class BuildCable(object):
                 self.CFLAGS = "'-O2'"
             self.LD = "'-lnetcdf -lnetcdff'"
             self.LDFLAGS = "'-L/opt/local/lib -O2'"
+
+
 
 if __name__ == "__main__":
 
