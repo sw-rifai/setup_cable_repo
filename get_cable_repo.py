@@ -112,7 +112,7 @@ if __name__ == "__main__":
     #src_dir = "src"
     src_dir = cwd
     user = "mgk576"
-    repo = "https://trac.nci.org.au/svn/cable/branches/Users/mgk576/trunk_DESICA_PFTs/"
+    repo = "https://trac.nci.org.au/svn/cable/branches/Users/mgk576/trunk"
     #repo = "trunk"
     # ------------------------------------------- #
 
