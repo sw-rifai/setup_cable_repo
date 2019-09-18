@@ -163,8 +163,10 @@ class BuildCable(object):
             if error is 1:
                 raise("Error loading netcdf libs")
 
-            self.NCDIR = '/apps/netcdf/4.3.3.1/lib'
-            self.NCMOD = '/apps/netcdf/4.3.3.1/include'
+            #self.NCDIR = '/apps/netcdf/4.3.3.1/lib'
+            #self.NCMOD = '/apps/netcdf/4.3.3.1/include'
+            self.NCDIR = '/share/apps/netcdf-f/4.4.4-netcdfc-4.6.1/lib'
+            self.NCMOD = '/share/apps/netcdf-f/4.4.4-netcdfc-4.6.1/include'
             self.FC = 'ifort'
             if self.debug:
                 #self.CFLAGS = "'-O0'"
@@ -174,6 +176,8 @@ class BuildCable(object):
             self.LD = "'-lnetcdf -lnetcdff'"
             self.LDFLAGS = "'-L/opt/local/lib -O2'"
 
+            module load netcdf-c/4.4.1.1-intel
+module load netcdf-f/4.4.4-intel
 
 if __name__ == "__main__":
 
@@ -182,7 +186,7 @@ if __name__ == "__main__":
 
     #------------- Change stuff ------------- #
     src_dir = cwd
-    repo = "trunk_DESICA_PFTs"
+    repo = "trunk"
     define_own_paths = False
     debug = False
 
