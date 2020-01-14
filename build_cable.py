@@ -158,15 +158,13 @@ class BuildCable(object):
             if error is 1:
                 raise("Error unloading netcdf libs")
 
-            cmd = "module load netcdf/4.3.3.1"
+            cmd = "module load netcdf/4.7.1"
             error = subprocess.call(cmd, shell=True)
             if error is 1:
                 raise("Error loading netcdf libs")
 
-            #self.NCDIR = '/apps/netcdf/4.3.3.1/lib'
-            #self.NCMOD = '/apps/netcdf/4.3.3.1/include'
-            self.NCDIR = '/share/apps/netcdf-f/intel/4.4.4/lib'
-            self.NCMOD = '/share/apps/netcdf-f/intel/4.4.4/include'
+            self.NCDIR = '/apps/netcdf/4.7.1/lib'
+            self.NCMOD = '/apps/netcdf/4.7.1/include'
             self.FC = 'ifort'
             if self.debug:
                 #self.CFLAGS = "'-O0'"
