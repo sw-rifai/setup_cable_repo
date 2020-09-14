@@ -47,7 +47,7 @@ class BuildCable(object):
                              stderr=subprocess.STDOUT)
         host, error = p.communicate()
         host = str(host, 'utf-8').strip()
-        if error is 1:
+        if error == 1:
             raise("Error checking if repo exists")
 
         fname = "build.ksh"
@@ -98,12 +98,12 @@ class BuildCable(object):
 
         cmd = "chmod +x %s" % (ofname)
         error = subprocess.call(cmd, shell=True)
-        if error is 1:
+        if error == 1:
             raise("Error changing file to executable")
 
         cmd = "./%s clean" % (ofname)
         error = subprocess.call(cmd, shell=True)
-        if error is 1:
+        if error == 1:
             raise("Error building executable")
 
         os.remove(ofname)
@@ -133,7 +133,7 @@ class BuildCable(object):
             cmd = "module load netcdf-c/4.4.1.1-intel"
             cmd = "module load netcdf-f/4.4.4-intel"
             error = subprocess.call(cmd, shell=True)
-            if error is 1:
+            if error == 1:
                 raise("Error loading netcdf libs")
 
             #self.NCDIR = '/share/apps/netcdf/intel/4.1.3/lib'
@@ -155,12 +155,12 @@ class BuildCable(object):
             # is r1997 (etc) elif "raijin" in nodename:
             cmd = "module unload netcdf"
             error = subprocess.call(cmd, shell=True)
-            if error is 1:
+            if error == 1:
                 raise("Error unloading netcdf libs")
 
             cmd = "module load netcdf/4.7.1"
             error = subprocess.call(cmd, shell=True)
-            if error is 1:
+            if error == 1:
                 raise("Error loading netcdf libs")
 
             self.NCDIR = '/apps/netcdf/4.7.1/lib'
