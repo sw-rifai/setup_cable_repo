@@ -18,13 +18,14 @@ import datetime
 class GetCable(object):
 
     def __init__(self, src_dir=None, root="https://trac.nci.org.au/svn/cable",
-                 user=None):
+                 user=None, copy_trunk=True):
 
         self.src_dir = src_dir
         self.root = root
         self.user = user
         self.msg="\"checked out repo\""
         self.aux_dir = "CABLE-AUX"
+        self.copy_trunk = copy_trunk
 
     def main(self, repo_name=None, trunk=False):
 
@@ -56,7 +57,8 @@ class GetCable(object):
             if error == 1:
                 raise("Error checking if repo exists")
 
-            if "non-existent" in str(output) or "problem" in str(output):
+            if "non-existent" in str(output) or "problem" in str(output) and \
+                self.copy_trunk:
                 cmd = "svn copy %s/trunk %s/branches/Users/%s/%s -m %s" % \
                         (self.root, self.root, self.user, repo_name, self.msg)
                 error = subprocess.call(cmd, shell=True)
@@ -112,8 +114,8 @@ if __name__ == "__main__":
     src_dir = cwd
     user = "mgk576"
     #repo = "https://trac.nci.org.au/svn/cable/branches/Users/mgk576/trunk_covid"
-    repo = "trunk_covid"
+    repo = "trunk"
     # ------------------------------------------- #
 
-    G = GetCable(src_dir=src_dir, user=user)
+    G = GetCable(src_dir=src_dir, user=user, copy_trunk=False)
     G.main(repo_name=repo, trunk=True)
