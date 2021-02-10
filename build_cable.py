@@ -120,8 +120,9 @@ class BuildCable(object):
             else:
                 self.CFLAGS = "'-O2'"
 
-            self.LD = "'-lnetcdf -lnetcdff'"
-            self.LDFLAGS = "'-L/opt/local/lib -O2'"
+            self.LD = "'-L/opt/local/lib -lnetcdf -lnetcdff'"
+            self.LDFLAGS = "'-L/opt/local/lib -L/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/usr/lib'"
+
 
         elif "unsw" in nodename:
             # Will only work on 5,6,7 due to svn handshake issue
