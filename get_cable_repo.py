@@ -114,8 +114,10 @@ if __name__ == "__main__":
     src_dir = cwd
     user = "mgk576"
     #repo = "https://trac.nci.org.au/svn/cable/branches/Users/mgk576/trunk_covid"
-    repo = "trunk"
+    repo = "https://trac.nci.org.au/svn/cable/trunk"
+    #repo = "trunk"
     # ------------------------------------------- #
 
     G = GetCable(src_dir=src_dir, user=user, copy_trunk=False)
-    G.main(repo_name=repo, trunk=True)
+    #G.main(repo_name=repo, trunk=True)
+    G.main(repo_name=repo, trunk=False)
