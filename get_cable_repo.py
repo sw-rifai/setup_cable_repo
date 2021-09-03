@@ -6,9 +6,9 @@ Get the head of the CABLE trunk, the user branch and CABLE-AUX
 That's all folks.
 """
 
-__author__ = "Martin De Kauwe"
-__version__ = "1.0 (09.03.2019)"
-__email__ = "mdekauwe@gmail.com"
+# __author__ = "Martin De Kauwe"
+# __version__ = "1.0 (09.03.2019)"
+# __email__ = "mdekauwe@gmail.com"
 
 import os
 import sys
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     cwd = os.getcwd()
     #src_dir = "src"
     src_dir = cwd
-    user = "mgk576"
+    user = "sr2710"
     #repo = "https://trac.nci.org.au/svn/cable/branches/Users/mgk576/trunk_covid"
     repo = "https://trac.nci.org.au/svn/cable/trunk"
     #repo = "trunk"

@@ -6,9 +6,9 @@ Build CABLE executables ...
 That's all folks.
 """
 
-__author__ = "Martin De Kauwe"
-__version__ = "1.0 (09.03.2019)"
-__email__ = "mdekauwe@gmail.com"
+# __author__ = "Martin De Kauwe"
+# __version__ = "1.0 (09.03.2019)"
+# __email__ = "mdekauwe@gmail.com"
 
 import os
 import sys
@@ -33,16 +33,26 @@ class BuildCable(object):
 
         build_dir = "%s/%s" % (repo_name, "offline")
         cwd = os.getcwd()
+        # print(cwd)
         os.chdir(os.path.join(self.src_dir, build_dir))
+        # print(os.getcwd())
 
+        # print('adjust_build_script')
         ofname = self.adjust_build_script()
+        print(ofname)
+        if os.path.isfile(ofname):
+          print("ofname exists")
+
+        # print('done adjust_build_script')
+        # print(type(ofname))
+
         self.build_cable(ofname)
 
         os.chdir(cwd)
 
     def adjust_build_script(self):
 
-        cmd = "echo `uname -n | cut -c 1-4`"
+        cmd = "echo `uname -n | cut -c 1-3`"
         p = subprocess.Popen(cmd, shell=True, stdout=subprocess.PIPE,
                              stderr=subprocess.STDOUT)
         host, error = p.communicate()
@@ -63,6 +73,8 @@ class BuildCable(object):
         while i < len(lines):
             line = lines[i]
             if 'known_hosts()' in line and i < 10:
+                # print('starting known host')
+                print(self.NCDIR)
                 print("known_hosts()", end="\n", file=of)
                 print("{", end="\n", file=of)
                 print("  set -A kh  pear jigg nXXX raij ces2 ccrc mael %s" %\
@@ -95,18 +107,21 @@ class BuildCable(object):
         return (ofname)
 
     def build_cable(self, ofname):
-
+        print("starting build cable")
+        print(ofname)
         cmd = "chmod +x %s" % (ofname)
         error = subprocess.call(cmd, shell=True)
         if error == 1:
             raise("Error changing file to executable")
+        print(os.getcwd())
 
-        cmd = "./%s clean" % (ofname)
+        cmd = "/home/sami/srifai\@gmail.com/work/research/CABLE/setup_cable_repo/trunk/offline/%s clean" % (ofname)
         error = subprocess.call(cmd, shell=True)
         if error == 1:
             raise("Error building executable")
+        print(cmd)
 
-        os.remove(ofname)
+        # os.remove(ofname)
 
     def set_paths(self, nodename):
 
@@ -185,20 +200,29 @@ if __name__ == "__main__":
     #------------- Change stuff ------------- #
     src_dir = cwd
     repo = "trunk"
-    define_own_paths = False
+    define_own_paths = True
     debug = False
 
     if define_own_paths:
-        raise("you need to set these then!")
+        # raise("you need to set these then!")
+        NCDIR = '-L/home/sami/miniconda3/envs/sci/lib'
+        # NCMOD = '-L/home/sami/miniconda3/envs/sci/include'
+        NCMOD = '/home/sami/miniconda3/envs/sci/include'
+        # FC = '/home/sami/miniconda3/envs/sci/bin/x86_64-conda-linux-gnu-gfortran'
+        FC = '/bin/gfortran'
+        LD = "'-lnetcdf -lnetcdff'"
+        LDFLAGS = "'-L/home/sami/miniconda3/envs/sci/lib -O2'"
         #NCDIR = '/opt/local/lib/'
         #NCMOD = '/opt/local/include/'
         #FC = 'gfortran'
-        #CFLAGS = '-O2'
+        CFLAGS = "'-O2'"
         #LD = "'-lnetcdf -lnetcdff'"
         #LDFLAGS = "'-L/opt/local/lib -O2'"
     # ------------------------------------------- #
 
-    B = BuildCable(src_dir=src_dir, debug=debug)
+    B = BuildCable(src_dir=src_dir, debug=debug,
+                    NCDIR=NCDIR, NCMOD=NCMOD, FC=FC,
+                    CFLAGS=CFLAGS, LD=LD, LDFLAGS=LDFLAGS)
     if define_own_paths == False:
         B.set_paths(nodename)
     B.main(repo_name=repo)
